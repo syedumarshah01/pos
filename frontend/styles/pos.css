@@ -1,0 +1,16 @@
+.border-bottom {
+    border-bottom: 1px dashed black;
+}
+
+.customize-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.customize-item > * {
+    flex: 1;
+    text-align: center;
+}
+
+

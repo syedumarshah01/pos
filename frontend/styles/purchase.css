@@ -1,0 +1,11 @@
+.purchase-headers {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid black;
+}
+
+.purchase-headers span {
+    flex: 1;
+    text-align: center;
+}

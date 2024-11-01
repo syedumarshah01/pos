@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Point Of Sale</title>
+    <link rel="stylesheet" href="./point_of_sale.css">
+    <link rel="stylesheet" href="../css/bootstrap/css/bootstrap.min.css">
+    <script>
+        // Redirect to the Node.js server's root route on page load
+        // window.onload = function() {
+        //     window.location.href = 'http://localhost:3000/'; // Redirect to the Node.js server
+        // };
+        // window.location.href = 'http://localhost:3000/'
+    </script>
+</head>
+<body>
+    <header class="container text-center p-3">
+        <h1>Point Of Sale</h1>
+    </header>
+
+    <main>
+        <div class="container-fluid">
+            <div id="section-one" class="row p-2" style="border: 2px solid black;">
+                <div class="itemcode col-sm-3 d-flex flex-column align-items-center">
+                    <label for="search">Itemcode</label>
+                    <input style="width: 100%;" id="itemcodeInput" type="text">
+                </div>
+
+                <div class="price col-sm-3 d-flex flex-column align-items-center">
+                    <label for="search">Price</label>
+                    <input style="width: 100%; border: none;" id="priceInput" type="search">
+                </div>
+
+                <div class="quantity col-sm-3 d-flex flex-column align-items-center">
+                    <label for="search">Quantity</label>
+                    <input style="width: 100%; border: none;" id="quantityInput" type="search">
+                </div>
+                
+                <div class="total_price col-sm-3 d-flex flex-column align-items-center">
+                    <span>Total Price</span>
+                </div>
+            </div>
+
+            <div id="section-two" class="bill-area row d-flex flex-column" style="height: 50vh; border: solid black; border-width: 0px 2px 2px 2px;">
+                
+            </div>
+
+            <div id="section-three" class="row p-2 d-flex justify-content-around">
+                <div class="void col-sm-2 btn btn-secondary">
+                    <span>Void Item</span>
+                </div>
+                <div class="changeprice col-sm-2 btn btn-secondary">
+                    <span>Change Price</span>
+                </div>
+                <div class="changequantity col-sm-2 btn btn-secondary">
+                    <span>Change Quantity</span>
+                </div>
+                <div class="returnitem col-sm-2 btn btn-secondary">
+                    <span>Return Item</span>
+                </div>
+            </div>
+
+            <div id="section-four" class="row d-flex justify-content-around">
+                <div class="col-sm-3 d-flex flex-column align-items-center justify-content-between">
+                    <span>Total Amount</span>
+                    <span id="total-amount">0</span>
+                </div>
+                <div class="col-sm-3 d-flex flex-column align-items-center">
+                    <label for="text">Payment</label>
+                    <input id="payment-amount" type="text">
+                </div>
+                <div class="col-sm-3 d-flex flex-column align-items-center justify-content-between">
+                    <span>Change</span>
+                    <span id="change"></span>
+                </div>
+            </div>
+
+            
+            
+        </div>
+    </main>
+
+    <script src="../js/jquery/dist/jquery.min.js"></script>
+    <script type="module" src="./point_of_sale.js"></script>
+</body>
+</html>
