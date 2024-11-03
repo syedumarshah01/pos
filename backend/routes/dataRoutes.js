@@ -1,5 +1,11 @@
 import express from 'express';
-const router = express.Router();
+import { getItemData, getSuppliers, purchase } from '../controllers/dataController.js';
+
+const dataRouter = express.Router();
+
+dataRouter.get('/suppliers', getSuppliers)
+dataRouter.post('/search', getItemData)
+dataRouter.post('/purchase', purchase)
 
 
-router.post('/search', )
+export default dataRouter;

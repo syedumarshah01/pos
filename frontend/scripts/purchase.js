@@ -1,14 +1,14 @@
-import { createDynamicElement } from "../pos/utils/utils.pos.js";
-const BILL_ITEMS = []
-let RETURN = false
-let purchaseMode = true
+import { createDynamicElement } from "./pos.utils.js";
+import { fetchData, postData } from "./api.js";
 
 const itemsPurchaseData = {}
 let currentItem = null;
 
 
 $(document).ready(() => {
-    $.get('http://localhost:3000/suppliers', (data) => {
+
+    fetchData('/suppliers')
+    .then((data) => {
         for(let i = 0; i<data.suppliers.length; i++) {
             const option_element = document.createElement('option')
             $(option_element).attr('value', data.suppliers[i])
@@ -16,6 +16,17 @@ $(document).ready(() => {
             $("#suppliers").append(option_element)
         }
     })
+
+
+
+    // $.get('http://localhost:3000/suppliers', (data) => {
+    //     for(let i = 0; i<data.suppliers.length; i++) {
+    //         const option_element = document.createElement('option')
+    //         $(option_element).attr('value', data.suppliers[i])
+    //         $(option_element).text(data.suppliers[i])
+    //         $("#suppliers").append(option_element)
+    //     }
+    // })
 })
 
 
@@ -23,8 +34,9 @@ $("#itemcode").on('keydown', function (event) {
     if(event.key === 'Enter') {
         $("#cost").focus()
         const item_code = $(this).val().trim()
-        $.post("http://localhost:3000/search", {itemcode: item_code})
-        .done(function (data) {
+
+        fetchData('/search', {itemcode: item_code})
+        .then((data) => {
             itemsPurchaseData[data.itemcode] = {}
             itemsPurchaseData[data.itemcode]['itemcode'] = data.itemcode
             itemsPurchaseData[data.itemcode]['product_name'] = data.product_name
@@ -45,13 +57,15 @@ $("#itemcode").on('keydown', function (event) {
             $(itemnameElement).text(data.product_name)
             $(".itemcode").append(itemnameElement)
         })
-        .fail(function() {
+        .catch((err) => {
+            console.log(err)
             alert("Itemcode Does Not Exist")
             $('#itemcode').focus()
         })
+    }
+})
+
             
-    }}
-)
 
 $("#cost").on('keydown', function(event) {
     if(event.key === "Enter") {
@@ -80,7 +94,7 @@ $("#sale").on('keydown', function(event) {
         if(itemsPurchaseData[currentItem]) {
             $('#' + `${currentItem}`).remove()
         }
-        createDynamicElement(itemsPurchaseData[currentItem], $(".bill-area"), BILL_ITEMS, RETURN, itemsPurchaseData[currentItem]['quantity'], purchaseMode)
+        createDynamicElement(itemsPurchaseData[currentItem], $(".bill-area"), {quantity: itemsPurchaseData[currentItem]['quantity'], purchaseMode: true})
     }
 })
 
@@ -111,11 +125,9 @@ $('#post').click(function () {
             delete itemsPurchaseData[key]
         }
     }
-    $.post('http://localhost:3000/purchase', {
-        purchase_data: itemsPurchaseData
-    })
-    .done(function(data) {
-        $('#post').text(data['message'])
-    })
+
+    postData('/purchase', {purchaseData: itemsPurchaseData})
+    .then(data => $('#post').text(data['message']))
+    .catch((err) => console.log(err))   
 })
 
