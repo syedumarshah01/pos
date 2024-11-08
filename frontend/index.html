@@ -4,30 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventory Management System</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./styles/bootstrap.min.css">
+    <link rel="stylesheet" href="./styles/index.css">
+    <link rel="stylesheet" href="./styles/main.css">
 </head>
 <body>
     <header>
         <h1>Inventory Management System</h1>
     </header>
 
-    <main>
-        <div class="container">
-            <div id="pos" class="item">
-                <a href="../client/pos/point_of_sale.html">Point Of Sale</a>
-            </div>
-            <div id="purchase" class="item">
-                <a href="../client/purchase/purchase.html">Purchase</a>
-            </div>
-            <div id="purchase-return" class="item">
-                Purchase Return
-            </div>
-            <div id="dashboard" class="item">
-                Dashboard
-            </div>
+
+    <div class="container-fluid mt-3">
+        <div class="row m-1 text-center" style="box-sizing: border-box; height: 30vh; width: 30%;">
+            <div class="custom col-sm-12 p-3"><a href="./pos.html">Point of Sale</a></div>
+            <div class="custom col-sm-12 p-3"><a href="./purchase.html">Purchase</a></div>
+            <div class="custom col-sm-12 p-3"><a href="./itemfile.html">Item File</a></div>
+            <div class="custom col-sm-12 p-3"><a href="./dashboard.html">Dashboard</a></div>
+            <div class="custom col-sm-12 p-3"><a href="./supplier.html">Suppliers</a></div>
         </div>
-    </main>
-    <!-- <script src="./script.js"></script> -->
-     
+
+    </div>
 </body>
 </html>

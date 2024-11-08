@@ -1,19 +1,20 @@
 import {CONN} from '../config/database.js'
 
 export function queryItemData(itemcode) {
-    const sqlGet = 'SELECT product_name, sale_price FROM items WHERE itemcode = ?';
+    const sqlGet = 'SELECT product_name, cost_price, sale_price FROM items WHERE itemcode = ?';
 
     return new Promise((resolve, reject) => {
         CONN.query(sqlGet, [itemcode], (err, results) => {
         if(err) return reject(err)
         
-        if(results.length === 0) return reject()
+        if(results.length === 0) return reject(new Error("Itemcode Does Not Exist"))
         
         const item = results[0]
-        const {product_name, sale_price} = item;
+        const {product_name, cost_price, sale_price} = item;
         const itemData = {
             itemcode: itemcode,
             product_name: product_name,
+            cost_price: cost_price,
             sale_price: sale_price,
             quantity: 1
         }
@@ -55,20 +56,19 @@ export const updateItemQuantity = (itemcode, quantity) => {
             resolve({
                 message: "Updated Successfully..."
             }) 
-            return
+            
         })
     })
 }
 
-export const querySuppliers = () => {
-    const sqlGetSuppliers = 'SELECT DISTINCT supplier FROM items';
+
+export const insertNewItem = (itemcode, itemName, costPrice, salePrice, supplier) => {
+    const sqlInsertItem = 'INSERT INTO items (itemcode, product_name, on_hand, cost_price, sale_price, supplier) VALUES(?, ?, 0, ?, ?, ?)'
 
     return new Promise((resolve, reject) => {
-        CONN.query(sqlGetSuppliers, (err, results) => {
-            if(err) return reject(err);
-
-            const suppliers = results.map(item => item.supplier);
-            resolve(suppliers)
+        CONN.query(sqlInsertItem, [itemcode, itemName, costPrice, salePrice, supplier], (err) => {
+            if(err) return reject(err)
+            resolve({message: "Added Successfully..."})
         })
     })
 }
@@ -80,8 +80,32 @@ export const purchaseUpdate = (itemcode, costPrice, salePrice, quantity) => {
     return new Promise((resolve, reject) => {
         CONN.query(sqlPurchase, [costPrice, salePrice, quantity, itemcode], (err) => {
             if(err) return reject(err);
-            resolve()
+            resolve({message: "Purchased Successfully..."})
         })
     })
 }
 
+export const purchaseReturnUpdate = (itemcode, quantity) => {
+    const sqlPurchaseReturn = 'UPDATE items SET on_hand = on_hand - ? WHERE itemcode = ?'
+
+    return new Promise((resolve, reject) => {
+        CONN.query(sqlPurchaseReturn, [quantity, itemcode], (err) => {
+            if(err) return reject(err);
+            resolve({message: "Posted Successfully..."})
+        })
+    })
+}
+
+
+
+export const updateItem = (itemCode, itemName, costPrice, salePrice, supplier) => {
+    const sqlUpdateItem = 'UPDATE items SET product_name = ?, cost_price = ?, sale_price = ?, supplier = ? WHERE itemcode = ?';
+
+    return new Promise((resolve, reject) => {
+        CONN.query(sqlUpdateItem, [itemName, costPrice, salePrice, supplier, itemCode], (err) => {
+            if(err) return reject(err)
+            resolve({message: "Updated Successfully..."})
+        })
+    })
+
+}

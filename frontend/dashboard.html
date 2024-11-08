@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="./styles/bootstrap.min.css">
+</head>
+<body>
+    <header class="text-center m-4 p-2">
+        <h1>Dashboard</h1>
+    </header>
+
+    <section class="container">
+        <div class="row" style="height: 25vh;">
+            <h2 class="col-sm-12">Today's Sale</h2>
+            <span class="col-sm-12" id="today-sale" style="font-size: 3rem;"></span>
+        </div>
+        
+        <div class="row" style="height: 25vh;">
+            <h2 class="col-sm-12">Today's Purchases</h2>
+            <span class="col-sm-12" id="today-purchases" style="font-size: 3rem;"></span>
+        </div>
+
+        <div class="row" style="height: 25vh;">
+            <h2 class="col-sm-12">Today's Purchase Returns</h2>
+            <span class="col-sm-12" id="today-purchase-returns" style="font-size: 3rem;"></span>
+        </div>
+    </section>
+
+    <script src="./scripts/jquery.min.js"></script>
+    <script type="module" src="./scripts/dashboard.js"></script>
+</body>
+</html>

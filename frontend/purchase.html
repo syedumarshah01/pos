@@ -5,51 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Purchase</title>
     <link rel="stylesheet" href="./styles/pos.css">
-    <link rel="stylesheet" href="./styles/purchase.css">
+    <link rel="stylesheet" href="./styles/main.css">
     <link rel="stylesheet" href="./styles/bootstrap.min.css">
 
 </head>
 <body>
-    <header>
-        <h1 class="text-center m-3 p-2">Purchase</h1>
+    <header class="text-center m-4 p-2">
+        <h1>Purchase</h1>
     </header>
     
     <section class="fluid-container m-4">
-        <div>
-            <label for="suppliers">Supplier: </label>
-            <select name="suppliers" id="suppliers">
+        <div class="row">
+            <label class="col-sm-2" for="suppliers">Supplier: </label>
+            <select class="col-sm-3" name="suppliers" id="suppliers">
 
             </select>
         </div>
 
-        <div class="itemcode">
-            <label for="itemcode">Itemcode: </label>
-            <input type="text" id="itemcode">
+        <div class="itemcode row">
+                <label class="col-sm-2" for="itemcode">Itemcode: </label>
+                <input class="col-sm-3" type="text" id="itemcode">
+                <span class="col-sm-3" id="product_name"></span>
         </div>
 
-        <div class="cost-price">
-            <label for="cost">Cost Price: </label>
-            <input type="text" id="cost">
+        <div class="row">
+            <label class="col-sm-2" for="cost">Cost Price: </label>
+            <input class="col-sm-3" type="text" id="cost">
         </div>
 
-        <div class="quantity">
-            <label for="quantity">Quantity: </label>
-            <input type="text" id="quantity">
+        <div class="row">
+            <label class="col-sm-2" for="quantity">Quantity: </label>
+            <input class="col-sm-3" type="text" id="quantity">
         </div>
 
-        <div class="sale-price">
-            <label for="sale">Sale Price: </label>
-            <input type="text" id="sale">
+        <div class="row">
+            <label class="col-sm-2" for="sale">Sale Price: </label>
+            <input class="col-sm-3" type="text" id="sale">
         </div>
 
-        <div class="cost-total">
-            <label for="totalcost">Total Cost: </label>
-            <span id="ctotal"></span>
+        <div class="row">
+            <label class="col-sm-2" for="totalcost">Total Cost: </label>
+            <span class="col-sm-3" id="ctotal"></span>
         </div>
 
-        <div class="sale-total">
-            <label for="totalsale">Total Sale: </label>
-            <span id="stotal"></span>
+        <div class="row">
+            <label class="col-sm-2" for="totalsale">Total Sale: </label>
+            <span class="col-sm-3" id="stotal"></span>
         </div>
 
         <div>
@@ -60,7 +61,7 @@
     </section>
 
     <section class="bill-area">
-        <div class="purchase-headers">
+        <div class="bill-headers">
             <span>
                 Product Name
             </span>

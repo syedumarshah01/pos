@@ -1,7 +1,7 @@
 import { createDynamicElement } from "./pos.utils.js";
 import { fetchData, postData } from "./api.js";
 
-const itemsPurchaseData = {}
+const itemsPurchaseReturnData = {}
 let currentItem = null;
 
 
@@ -16,6 +16,9 @@ $(document).ready(() => {
             $("#suppliers").append(option_element)
         }
     })
+
+
+
 })
 
 
@@ -23,7 +26,6 @@ $("#itemcode").on('keydown', function (event) {
     if(event.key === 'Enter') {
         $("#cost").focus()
         const item_code = $(this).val().trim()
-
 
         fetchData('/search', {itemcode: item_code})
         .then((data) => {
@@ -38,13 +40,14 @@ $("#itemcode").on('keydown', function (event) {
 
         fetchData('/search', {itemcode: item_code})
         .then((data) => {
-            itemsPurchaseData[data.itemcode] = {}
-            itemsPurchaseData[data.itemcode]['itemcode'] = data.itemcode
-            itemsPurchaseData[data.itemcode]['product_name'] = data.product_name
+            itemsPurchaseReturnData[data.itemcode] = {}
+            itemsPurchaseReturnData[data.itemcode]['itemcode'] = data.itemcode
+            itemsPurchaseReturnData[data.itemcode]['product_name'] = data.product_name
 
             currentItem = data.itemcode
 
             $('#product_name').text(data.product_name)
+
         })
         .catch((err) => {
             console.log(err)
@@ -59,7 +62,7 @@ $("#itemcode").on('keydown', function (event) {
 $("#cost").on('keydown', function(event) {
     if(event.key === "Enter") {
         const costPrice = $(this).val().trim()
-        itemsPurchaseData[currentItem]['cost_price'] = costPrice
+        itemsPurchaseReturnData[currentItem]['cost_price'] = costPrice
         $('#quantity').focus()
     }
 })
@@ -67,7 +70,7 @@ $("#cost").on('keydown', function(event) {
 $("#quantity").on('keydown', function(event) {
     if(event.key === "Enter") {
         const quantity = $(this).val().trim()
-        itemsPurchaseData[currentItem]['quantity'] = quantity
+        itemsPurchaseReturnData[currentItem]['quantity'] = quantity
         $("#sale").focus()
         $("#ctotal").text(costTotal())
     }
@@ -76,22 +79,22 @@ $("#quantity").on('keydown', function(event) {
 $("#sale").on('keydown', function(event) {
     if(event.key === "Enter") {
         const salePrice = $(this).val().trim()
-        itemsPurchaseData[currentItem]['sale_price'] = salePrice
+        itemsPurchaseReturnData[currentItem]['sale_price'] = salePrice
         $("#itemcode").focus()
         $("#stotal").text(saleTotal())
 
-        if(itemsPurchaseData[currentItem]) {
+        if(itemsPurchaseReturnData[currentItem]) {
             $('#' + `${currentItem}`).remove()
         }
-        createDynamicElement(itemsPurchaseData[currentItem], $(".bill-area"), {quantity: itemsPurchaseData[currentItem]['quantity'], purchaseMode: true})
+        createDynamicElement(itemsPurchaseReturnData[currentItem], $(".bill-area"), {quantity: itemsPurchaseReturnData[currentItem]['quantity'], purchaseMode: true})
     }
 })
 
 function costTotal() {
     let totalCost = 0
     
-    for(let itemcode in itemsPurchaseData) {
-        totalCost += (Number(itemsPurchaseData[itemcode]['cost_price']) * Number(itemsPurchaseData[itemcode]['quantity']))
+    for(let itemcode in itemsPurchaseReturnData) {
+        totalCost += (Number(itemsPurchaseReturnData[itemcode]['cost_price']) * Number(itemsPurchaseReturnData[itemcode]['quantity']))
     }
     
     return totalCost
@@ -100,8 +103,8 @@ function costTotal() {
 function saleTotal() {
     let totalSale = 0
     
-    for(let itemcode in itemsPurchaseData) {
-        totalSale += (Number(itemsPurchaseData[itemcode]['sale_price']) * Number(itemsPurchaseData[itemcode]['quantity']))
+    for(let itemcode in itemsPurchaseReturnData) {
+        totalSale += (Number(itemsPurchaseReturnData[itemcode]['sale_price']) * Number(itemsPurchaseReturnData[itemcode]['quantity']))
     }
     
     return totalSale
@@ -109,16 +112,16 @@ function saleTotal() {
 
 
 $('#post').click(function () {
-    for(let key in itemsPurchaseData) {
-        if(Object.keys(itemsPurchaseData[key]).length < 5) {
-            delete itemsPurchaseData[key]
+    for(let key in itemsPurchaseReturnData) {
+        if(Object.keys(itemsPurchaseReturnData[key]).length < 5) {
+            delete itemsPurchaseReturnData[key]
         }
     }
 
 
-    postData('/purchase_history', {supplier: $('#suppliers').val(), purchaseAmount: costTotal()})
+    postData('/purchase_return_history', {supplier: $('#suppliers').val(), purchaseReturnAmount: costTotal()})
 
-    postData('/purchase', {purchaseData: itemsPurchaseData})
+    postData('/purchasereturn', {purchaseReturnData: itemsPurchaseReturnData})
     .then((data) => {
         $('#post').text(data.message)
     })

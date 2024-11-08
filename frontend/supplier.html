@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suppliers</title>
+    <link rel="stylesheet" href="./styles/bootstrap.min.css">
+    <link rel="stylesheet" href="./styles/main.css">
+</head>
+<body>
+    <header class="text-center m-5">
+        <h1>Suppliers</h1>
+    </header>
+
+    <section class="fluid-container m-4">
+        <div class="row">
+            <label class="col-sm-2" for="supplier-name">Supplier Name: </label>
+            <input class="col-sm-3" type="text" id="suppliername">
+        </div>
+    
+        <div class="row">
+            <label class="col-sm-2" for="supplier-contact">Supplier Contact: </label>
+            <input class="col-sm-3" type="text" id="suppliercontact">
+        </div>
+
+        <div>
+            <button class="btn btn-primary btn-dark" id="post">Add Supplier</button>
+        </div>
+    
+    </section>
+    
+    <script src="./scripts/jquery.min.js"></script>
+    <script type="module" src="./scripts/supplier.js"></script>
+</body>
+</html>

@@ -10,8 +10,8 @@ export function fetchData(endpoint, data=null) {
             success: function(data) {
                 resolve(data)
             },
-            error: function() {
-                reject(new Error("Error Occurred During Fetching..."))
+            error: function(xhr, status, error) {
+                reject(error.message)
             }
         })
     })  
@@ -29,8 +29,8 @@ export function postData(endpoint, data) {
             success: function(data) {
                 resolve(data)
             },
-            error: function() {
-                reject(new Error("Error Occurred During Posting..."))
+            error: function(xhr, status, error) {
+                reject(error.message)
             }
         })
     })

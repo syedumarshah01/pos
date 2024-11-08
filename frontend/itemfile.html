@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase</title>
+    <link rel="stylesheet" href="./styles/pos.css">
+    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="./styles/bootstrap.min.css">
+
+</head>
+<body>
+    <header>
+        <h1 class="text-center m-3 p-2">Item File</h1>
+    </header>
+    
+    <section class="fluid-container m-4">
+        <div class="row">
+            <label class="col-sm-2" for="suppliers">Supplier: </label>
+            <select class="col-sm-3" name="suppliers" id="suppliers">
+
+            </select>
+        </div>
+
+        <div class="row">
+            <label class="col-sm-2" for="itemcode">Itemcode: </label>
+            <input class="col-sm-3" type="text" id="itemcode">
+        </div>
+
+        <div class="row">
+            <label class="col-sm-2" for="itemname">Item Name: </label>
+            <input class="col-sm-3" type="text" id="itemname">
+        </div>
+
+        <div class="row">
+            <label class="col-sm-2" for="cost">Cost Price: </label>
+            <input class="col-sm-3" type="text" id="cost">
+        </div>
+
+
+        <div class="row">
+            <label class="col-sm-2" for="sale">Sale Price: </label>
+            <input class="col-sm-3" type="text" id="sale">
+        </div>
+
+        <div>
+            <button class="btn btn-primary btn-dark" id="additem">Add Item</button>
+        </div>
+
+    </section>
+
+    <script src="./scripts/jquery.min.js"></script>
+    <script type="module" src="./scripts/itemfile.js"></script>
+</body>
+</html>

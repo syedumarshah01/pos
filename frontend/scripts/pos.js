@@ -26,7 +26,7 @@ $('#itemcodeInput').on('keydown', function (event){
             })
         } else if(searchTerm && RETURN) {
             fetchData('/search', {itemcode: searchTerm})
-            .then(data => handleData(data, returnItem))
+            .then(data => handleData(data, posUtils.returnItem))
             .catch(err => console.log(err))
         } else {
             $('#payment-amount').focus()

@@ -14,3 +14,16 @@ export const insertToPaymentTable = (paymentAmount) => {
     })
 
 }
+
+export const queryTotalPayments = () => {
+    const sqlQueryPayments = 'SELECT SUM(payment_amount) as total_sale FROM payment_history WHERE DATE(payment_date_time) = CURDATE()';
+
+    return new Promise((resolve, reject) => {
+        CONN.query(sqlQueryPayments, (err, results) => {
+            if(err) return reject(err);
+            const totalPaymentAmount = results.map(element => element.total_sale)
+            resolve(totalPaymentAmount)
+        })
+    })
+}
+

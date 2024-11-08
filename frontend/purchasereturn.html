@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase Return</title>
+    <link rel="stylesheet" href="./styles/pos.css">
+    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="./styles/bootstrap.min.css">
+
+</head>
+<body>
+    <header class="text-center m-4 p-2">
+        <h1>Purchase Return</h1>
+    </header>
+    
+    <section class="fluid-container m-4">
+        <div class="row">
+            <label class="col-sm-2" for="suppliers">Supplier: </label>
+            <select class="col-sm-3" name="suppliers" id="suppliers">
+
+            </select>
+        </div>
+
+        <div class="itemcode row">
+                <label class="col-sm-2" for="itemcode">Itemcode: </label>
+                <input class="col-sm-3" type="text" id="itemcode">
+                <span class="col-sm-3" id="product_name"></span>
+        </div>
+
+        <div class="row">
+            <label class="col-sm-2" for="cost">Cost Price: </label>
+            <input class="col-sm-3" type="text" id="cost">
+        </div>
+
+        <div class="row">
+            <label class="col-sm-2" for="quantity">Quantity: </label>
+            <input class="col-sm-3" type="text" id="quantity">
+        </div>
+
+        <div class="row">
+            <label class="col-sm-2" for="sale">Sale Price: </label>
+            <input class="col-sm-3" type="text" id="sale">
+        </div>
+
+        <div class="row">
+            <label class="col-sm-2" for="totalcost">Total Cost: </label>
+            <span class="col-sm-3" id="ctotal"></span>
+        </div>
+
+        <div class="row">
+            <label class="col-sm-2" for="totalsale">Total Sale: </label>
+            <span class="col-sm-3" id="stotal"></span>
+        </div>
+
+        <div>
+            <button class="btn btn-primary btn-dark" id="post">POST</button>
+        </div>
+
+
+    </section>
+
+    <section class="bill-area">
+        <div class="purchase-headers">
+            <span>
+                Product Name
+            </span>
+            <span>
+                Cost Price
+            </span>
+            <span>
+                Sale Price
+            </span>
+            <span>
+                Quantity
+            </span>
+            <span>
+                T. Sale Price
+            </span>
+        </div>
+    </section>
+
+    <script src="./scripts/jquery.min.js"></script>
+    <script type="module" src="./scripts/purchasereturn.js"></script>
+</body>
+</html>
