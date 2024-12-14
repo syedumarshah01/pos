@@ -16,3 +16,11 @@ fetchData('/totalpurchase')
 .catch((err) => {
     console.log(err)
 })
+
+fetchData('/totalpurchasereturn')
+.then((data) => {
+    $('#today-purchase-returns').text(data)
+})
+.catch((err) => {
+    console.log(err)
+})

@@ -4,7 +4,7 @@ import dataRouter from './routes/dataRoutes.js'
 import paymentRouter from './routes/paymentRoutes.js';
 import purchaseRouter from './routes/purchaseHistoryRoutes.js';
 import supplierRouter from './routes/supplierRoutes.js';
-import purchaseReturnRouter from './routes/purchaseReturnHistoryRoute.js';
+import purchaseReturnRouter from './routes/purchaseReturnHistoryRoutes.js';
 
 const app = express()
 const PORT = process.env.PORT;
